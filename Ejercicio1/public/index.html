@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form action="/subir" method="post" enctype="multipart/form-data">
+        <input type="file" name="archivo" id="archivo">
+        <button type="submit">Subir archivo</button>
+    </form>
+
+    <div id="album"></div>
+
+    <script>
+        fetch('/imagenes').then(res => res.json()).then(data => {
+            let salida = ''
+            data.results.forEach(archivo => {
+                salida += `<button onclick="window.location.href='${archivo.url}'" download= "${archivo.name}"><img src="" alt=""></button>`
+            });
+            document.getElementById('album').innerHTML = salida
+        })
+    </script>
+
+</body>
+
+</html>
